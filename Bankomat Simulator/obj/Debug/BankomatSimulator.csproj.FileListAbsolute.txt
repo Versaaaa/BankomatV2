@@ -14,3 +14,16 @@ C:\Users\giuseppe.parisi\Desktop\Bankomat Simulator_old\obj\Debug\BankomatSimula
 C:\Users\giuseppe.parisi\Desktop\Bankomat Simulator_old\obj\Debug\BankomatSimulator.csproj.CoreCompileInputs.cache
 C:\Users\giuseppe.parisi\Desktop\Bankomat Simulator_old\obj\Debug\BankomatSimulator.exe
 C:\Users\giuseppe.parisi\Desktop\Bankomat Simulator_old\obj\Debug\BankomatSimulator.pdb
+C:\Users\francesco.chen\Source\Repos\Esercitazione_290923\Bankomat Simulator\bin\Debug\BankomatSimulator.exe.config
+C:\Users\francesco.chen\Source\Repos\Esercitazione_290923\Bankomat Simulator\bin\Debug\BankomatSimulator.exe
+C:\Users\francesco.chen\Source\Repos\Esercitazione_290923\Bankomat Simulator\bin\Debug\BankomatSimulator.pdb
+C:\Users\francesco.chen\Source\Repos\Esercitazione_290923\Bankomat Simulator\obj\Debug\BankomatSimulator.csproj.AssemblyReference.cache
+C:\Users\francesco.chen\Source\Repos\Esercitazione_290923\Bankomat Simulator\obj\Debug\BankomatSimulator.csproj.SuggestedBindingRedirects.cache
+C:\Users\francesco.chen\Source\Repos\Esercitazione_290923\Bankomat Simulator\obj\Debug\BankomatSimulator.csproj.CoreCompileInputs.cache
+C:\Users\francesco.chen\Source\Repos\Esercitazione_290923\Bankomat Simulator\obj\Debug\BankomatSimulator.exe
+C:\Users\francesco.chen\Source\Repos\Esercitazione_290923\Bankomat Simulator\obj\Debug\BankomatSimulator.pdb
+C:\Users\francesco.chen\Source\Repos\Esercitazione_290923\Bankomat Simulator\bin\Debug\EntityFramework.dll
+C:\Users\francesco.chen\Source\Repos\Esercitazione_290923\Bankomat Simulator\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\francesco.chen\Source\Repos\Esercitazione_290923\Bankomat Simulator\bin\Debug\EntityFramework.xml
+C:\Users\francesco.chen\Source\Repos\Esercitazione_290923\Bankomat Simulator\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\francesco.chen\Source\Repos\Esercitazione_290923\Bankomat Simulator\obj\Debug\BankomatSimulator.csproj.CopyComplete

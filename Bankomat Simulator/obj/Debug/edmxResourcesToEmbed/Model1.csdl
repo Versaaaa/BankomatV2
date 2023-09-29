@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankomatModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Banche">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Banche_Funzionalita" Relationship="Self.FK_Banche_Funzionalita_Banche" FromRole="Banche" ToRole="Banche_Funzionalita" />
+    <NavigationProperty Name="Utenti" Relationship="Self.FK_Utenti_Banche" FromRole="Banche" ToRole="Utenti" />
+  </EntityType>
+  <EntityType Name="Banche_Funzionalita">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdBanca" Type="Int64" Nullable="false" />
+    <Property Name="IdFunzionalita" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Banche" Relationship="Self.FK_Banche_Funzionalita_Banche" FromRole="Banche_Funzionalita" ToRole="Banche" />
+    <NavigationProperty Name="Funzionalita" Relationship="Self.FK_Banche_Funzionalita_Funzionalita" FromRole="Banche_Funzionalita" ToRole="Funzionalita" />
+  </EntityType>
+  <EntityType Name="ContiCorrente">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdUtente" Type="Int64" Nullable="false" />
+    <Property Name="Saldo" Type="Int32" Nullable="false" />
+    <Property Name="DataUltimaOperazione" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Utenti" Relationship="Self.FK_ContiCorrente_Utenti" FromRole="ContiCorrente" ToRole="Utenti" />
+  </EntityType>
+  <EntityType Name="Funzionalita">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Banche_Funzionalita" Relationship="Self.FK_Banche_Funzionalita_Funzionalita" FromRole="Funzionalita" ToRole="Banche_Funzionalita" />
+  </EntityType>
+  <EntityType Name="Movimenti">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NomeBanca" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="NomeUtente" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Funzionalita" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Quantita" Type="Int32" Nullable="false" />
+    <Property Name="DataOperazione" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="Utenti">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdBanca" Type="Int64" Nullable="false" />
+    <Property Name="NomeUtente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Bloccato" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Banche" Relationship="Self.FK_Utenti_Banche" FromRole="Utenti" ToRole="Banche" />
+    <NavigationProperty Name="ContiCorrente" Relationship="Self.FK_ContiCorrente_Utenti" FromRole="Utenti" ToRole="ContiCorrente" />
+  </EntityType>
+  <Association Name="FK_Banche_Funzionalita_Banche">
+    <End Role="Banche" Type="Self.Banche" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Banche_Funzionalita" Type="Self.Banche_Funzionalita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banche">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Banche_Funzionalita">
+        <PropertyRef Name="IdBanca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Utenti_Banche">
+    <End Role="Banche" Type="Self.Banche" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Utenti" Type="Self.Utenti" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banche">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Utenti">
+        <PropertyRef Name="IdBanca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Banche_Funzionalita_Funzionalita">
+    <End Role="Funzionalita" Type="Self.Funzionalita" Multiplicity="1" />
+    <End Role="Banche_Funzionalita" Type="Self.Banche_Funzionalita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Funzionalita">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Banche_Funzionalita">
+        <PropertyRef Name="IdFunzionalita" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContiCorrente_Utenti">
+    <End Role="Utenti" Type="Self.Utenti" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ContiCorrente" Type="Self.ContiCorrente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utenti">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContiCorrente">
+        <PropertyRef Name="IdUtente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BankomatEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Banche" EntityType="Self.Banche" />
+    <EntitySet Name="Banche_Funzionalita" EntityType="Self.Banche_Funzionalita" />
+    <EntitySet Name="ContiCorrente" EntityType="Self.ContiCorrente" />
+    <EntitySet Name="Funzionalita" EntityType="Self.Funzionalita" />
+    <EntitySet Name="Movimenti" EntityType="Self.Movimenti" />
+    <EntitySet Name="Utenti" EntityType="Self.Utenti" />
+    <AssociationSet Name="FK_Banche_Funzionalita_Banche" Association="Self.FK_Banche_Funzionalita_Banche">
+      <End Role="Banche" EntitySet="Banche" />
+      <End Role="Banche_Funzionalita" EntitySet="Banche_Funzionalita" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Utenti_Banche" Association="Self.FK_Utenti_Banche">
+      <End Role="Banche" EntitySet="Banche" />
+      <End Role="Utenti" EntitySet="Utenti" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Banche_Funzionalita_Funzionalita" Association="Self.FK_Banche_Funzionalita_Funzionalita">
+      <End Role="Funzionalita" EntitySet="Funzionalita" />
+      <End Role="Banche_Funzionalita" EntitySet="Banche_Funzionalita" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContiCorrente_Utenti" Association="Self.FK_ContiCorrente_Utenti">
+      <End Role="Utenti" EntitySet="Utenti" />
+      <End Role="ContiCorrente" EntitySet="ContiCorrente" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
