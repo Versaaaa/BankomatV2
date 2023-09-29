@@ -24,14 +24,20 @@ namespace BankomatSimulator
                 {
                     var x = new Banca();
                     var y = new SortedList<int, Banca.Funzionalita>();
-                    
+                    var z = new List<Utente>();
+
                     foreach (var funzione in connection.Banche_Funzionalita.Where(l => l.IdBanca == banca.Id))
                     {
                         y.Add((int)funzione.Id, (Banca.Funzionalita)funzione.IdFunzionalita);
                     }
-                    
+                    foreach (var utente in connection.Utenti.Where(i => i.IdBanca == banca.Id))
+                    {
+                        z.Add(new Utente((int)utente.Id) { contoCorrente = new ContoCorrente(connection.ContiCorrente.Where(k=> k.IdUtente == utente.Id).First().Id)});
+                    }
+
                     x.Nome = banca.Nome;
                     x.ElencoFunzionalita = y;
+                    x.Utenti = z;
                     
                     banche.Add((int)banca.Id, x);
                 }

@@ -48,27 +48,20 @@ namespace BankomatSimulator
         /// </summary>
         /// <param name="credenziali">Dati inseriti dall'utente </param>
         /// <returns></returns>
-        public EsitoLogin Login(Utente credenziali, out Utente utente)
+        public EsitoLogin Login(string username, string password, out Utente utente)
         {
             Utente utenteDaValidare = null;
             //ricerco utente sul 
             utente = null;
 
-            foreach (var elem in Utenti)
-            {
-                if(elem.NomeUtente == credenziali.NomeUtente)
-                {
-                    utenteDaValidare = elem;
-                    break;
-                }
-            }
+            utenteDaValidare = Utenti.Where(x => x.NomeUtente == username).First();
             if (utenteDaValidare == null)
             {
                 return EsitoLogin.UtentePasswordErrati;
             }
               
             
-            if (credenziali.Password != utenteDaValidare.Password)
+            if (password != utenteDaValidare.Password)
             {
                 utente = utenteDaValidare;
                 utenteDaValidare.TentativiDiAccessoErrati++;

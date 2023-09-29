@@ -104,18 +104,16 @@ namespace BankomatSimulator
         private bool Login()
         {
             bool autenticato = false;
-
-            Utente credenziali = new Utente();
             
             StampaIntestazione($"Login - {_bancaCorrente.Nome}");
 
             Console.Write("Nome utente: ");
-            credenziali.NomeUtente = Console.ReadLine();
+            var username = Console.ReadLine();
             Console.Write("Password: ");
-            credenziali.Password = Console.ReadLine();
+            var password = Console.ReadLine();
 
             Banca.EsitoLogin esitoLogin =
-                _bancaCorrente.Login(credenziali, out Utente utente);
+                _bancaCorrente.Login(username, password, out Utente utente);
 
             switch (esitoLogin)
             {
