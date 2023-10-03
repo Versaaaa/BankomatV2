@@ -12,11 +12,11 @@ namespace BankomatSimulator
     {
         public enum Funzionalita
         {
-            Versamento,
-            Prelievo,
-            ReportSaldo,
-            Sblocco,
-            Uscita
+            Uscita = 0,
+            ReportSaldo = 1,
+            Versamento = 2,
+            Prelievo = 3,
+            RegistroOperazioni = 4,
         }
 
 
@@ -54,12 +54,14 @@ namespace BankomatSimulator
             //ricerco utente sul 
             utente = null;
 
-            utenteDaValidare = Utenti.Where(x => x.NomeUtente == username).First();
-            if (utenteDaValidare == null)
+            try
+            {
+                utenteDaValidare = Utenti.Where(x => x.NomeUtente == username).First();
+            }
+            catch (InvalidOperationException)
             {
                 return EsitoLogin.UtentePasswordErrati;
-            }
-              
+            } 
             
             if (password != utenteDaValidare.Password)
             {

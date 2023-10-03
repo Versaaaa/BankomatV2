@@ -10,7 +10,6 @@ namespace BankomatSimulator
     class Program
     {
         static SortedList<int, Banca> banche;
-        static SqlConnection sqlConnection;
 
         /// <summary>
         /// Funzione di inizializzazione del Bankomat Simulator.
@@ -26,9 +25,11 @@ namespace BankomatSimulator
                     var y = new SortedList<int, Banca.Funzionalita>();
                     var z = new List<Utente>();
 
+                    int pointer = 0;
                     foreach (var funzione in connection.Banche_Funzionalita.Where(l => l.IdBanca == banca.Id))
                     {
-                        y.Add((int)funzione.Id, (Banca.Funzionalita)funzione.IdFunzionalita);
+                        pointer++;
+                        y.Add(pointer, (Banca.Funzionalita)funzione.IdFunzionalita);
                     }
                     foreach (var utente in connection.Utenti.Where(i => i.IdBanca == banca.Id))
                     {
